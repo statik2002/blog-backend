@@ -132,9 +132,11 @@ dmypy.json
 .pyre/
 
 # pytype static type analyzer
-.pytype/
+.pytype/git
 
 # Cython debug symbols
 cython_debug
 
 .editorconfig
+
+/media

@@ -1,16 +1,16 @@
 import os
 from environs import Env
-
+from dotenv import load_dotenv
+load_dotenv()
 env = Env()
 env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-COMPANY_COORDINATES = [55.751244, 37.618423]
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", [])
+ALLOWED_HOSTS = []
 
-SECRET_KEY = env.str("SECRET_KEY", "REPLACE_ME")
+SECRET_KEY = os.getenv("SECRET_KEY", "REPLACE_ME")
 
 DEBUG = env.bool("DEBUG", True)
 
@@ -22,13 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'debug_toolbar',
-
     'blog',
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -92,16 +89,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = os.getenv('STATIC_URL', '/static/')
+STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, 'media'))
 
 STATIC_ROOT = os.getenv("STATIC_ROOT")
 
-MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+MEDIA_URL = '127.0.0.1:8000/media/'
